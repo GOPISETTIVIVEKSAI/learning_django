@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Plant Nursery</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #0dd12b;
+        color: #333;
+        line-height: 1.6;
+    }
+    
+    header {
+        background-color: #4CAF50;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    header .logo h1 {
+        color: white;
+    }
+    
+    nav ul {
+        list-style: none;
+    }
+    
+    nav ul li {
+        display: inline;
+        margin: 0 15px;
+    }
+    
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+    }
+    
+    .hero {
+        background: url('https://source.unsplash.com/1600x900/?plants,garden') no-repeat center center/cover;
+        color: white;
+        text-align: center;
+        padding: 100px 20px;
+    }
+    
+    .hero h2 {
+        font-size: 48px;
+    }
+    
+    .hero p {
+        font-size: 20px;
+    }
+    
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    
+    button:hover {
+        background-color: #45a049;
+    }
+    
+    .about, .services, .contact {
+        padding: 40px 20px;
+        text-align: center;
+    }
+    
+    .services .service-list {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+    
+    .services .service {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        width: 30%;
+    }
+    
+    .contact form {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .contact form input, .contact form textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    footer {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        margin-top: 40px;
+    }
+</style>
+<script>
+    function learnMore() {
+        window.location.href = '#about';
+    }
+    
+</script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Green Nursery</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Welcome to  Nursery</h2>
+        <p>Your one-stop destination for quality plants, gardening tools, and expert advice.</p>
+        <button onclick="learnMore()">Learn More</button>
+    </section>
+
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>At GreenThumb Nursery, we provide a variety of plants, including indoor, outdoor, flowering, and ornamental species.</p>
+    </section>
+    <h1>plants</h1>
+    {{plants}}
+    <h1>{{msg}}</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">Name</th>
+            <th scope="col">price</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for plant in plants%}
+            {% if plant.price < 100 %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{plant.name}}</td>
+            <td>{{plant.price}}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="service-list">
+            <div class="service">
+                <h3>Plant Sales</h3>
+                <p>We offer a wide range of plants suited to all your gardening needs.</p>
+            </div>
+            <div class="service">
+                <h3>Garden Design</h3>
+                <p>We help you design the perfect garden with our expert advice and services.</p>
+            </div>
+            <div class="service">
+                <h3>Maintenance</h3>
+                <p>Our team provides professional plant maintenance and care services.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 GreenThumb Nursery. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+{% endblock %}
